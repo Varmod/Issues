@@ -49,12 +49,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\player_arrow_right.png" />
+	  <None Remove="Resources\Images\player_pause.png" />
+	  <None Remove="Resources\Images\player_play.png" />
 	  <None Remove="Resources\Raw\Sample.mp4" />
+	  <None Remove="Resources\Raw\Sample2.mp4" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="2.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Update="Resources\Raw\Sample2.mp4">
+	    <LogicalName>%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+	  </MauiAsset>
 	</ItemGroup>
 
 </Project>

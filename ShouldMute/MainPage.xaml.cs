@@ -1,24 +1,44 @@
-﻿namespace ShouldMute
+﻿using CommunityToolkit.Maui.Views;
+
+namespace ShouldMute
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        bool _flip = false;
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        void OnPlayPauseButtonClicked(object sender, EventArgs e)
         {
-            count++;
+            if (video2.CurrentState == CommunityToolkit.Maui.Core.Primitives.MediaElementState.Playing)
+            {
+                video2.Pause();
+            }
+            else if (video2.CurrentState == CommunityToolkit.Maui.Core.Primitives.MediaElementState.Paused)
+            {
+                video2.Play();
+            }
+            else if (video2.CurrentState == CommunityToolkit.Maui.Core.Primitives.MediaElementState.Stopped)
+            {
+                video2.Stop();
+                video2.Play();
+            }
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+        private void NextVideo_Clicked(object sender, EventArgs e)
+        {
+            if (_flip)
+            {
+                video2.Source = new ResourceMediaSource() { Path = "Sample.mp4" }; 
+            }
             else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            {
+                video2.Source = new ResourceMediaSource() { Path = "Sample2.mp4" };
+            }
+            _flip = !_flip;
         }
     }
 }
